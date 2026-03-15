@@ -3,272 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>台灣早餐 & 鹹酥雞</title>
+<title>台灣早餐點餐</title>
 <style>
-  *{box-sizing:border-box}
-  body{margin:0;padding:12px;background:#f2f7f9;font-family:Arial,sans-serif}
-  .box{max-width:500px;margin:auto;background:white;border-radius:14px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
-  .title{text-align:center;font-size:22px;font-weight:bold;margin:0 0 16px}
-  .cate{font-weight:bold;color:#e63946;font-size:17px;margin:20px 0 10px}
-  .food{display:flex;align-items:center;padding:12px 0;border-bottom:1px solid #eee}
-  .food img{width:76px;height:76px;object-fit:cover;border-radius:10px;margin-right:12px}
-  .info{flex:1}
-  .name{font-weight:bold;font-size:16px}
-  .vn{font-size:13px;color:#555;margin-top:2px}
-  .price{font-weight:bold;color:#e63946;font-size:16px;width:85px;text-align:right}
-  .num{display:flex;align-items:center;gap:8px}
-  .num button{width:34px;height:34px;border:none;background:#0096c7;color:white;border-radius:50%;font-size:16px}
-  .num span{min-width:26px;text-align:center;font-size:16px;font-weight:bold}
-  .cart{margin-top:24px;padding:18px;background:#f8f9fa;border-radius:12px}
-  .cart-title{font-weight:bold;font-size:17px;margin-bottom:10px}
-  .total{font-weight:bold;font-size:18px;color:#e63946;margin:12px 0}
-  .btn-send{width:100%;padding:14px;background:#2563eb;color:white;border:none;border-radius:12px;font-size:17px;font-weight:bold}
-  .customer-info{margin-top:16px;padding:12px;background:#f1f5f9;border-radius:8px}
-  .customer-info input,
-  .customer-info select{width:100%;margin:6px 0;padding:10px;border:1px solid #ddd;border-radius:6px;font-size:15px}
-  .customer-info label{font-size:14px;color:#555}
+body{background:#f4f4f4;margin:0;padding:10px;font-family:Arial}
+.box{max-width:500px;margin:auto;background:#fff;border-radius:12px;padding:15px}
+.item{display:flex;align-items:center;padding:10px 0;border-bottom:1px solid #eee}
+.item img{width:70px;height:70px;border-radius:8px;margin-right:10px;object-fit:cover}
+.info{flex:1}
+.name{font-weight:bold}
+.vn{font-size:12px;color:#666}
+.price{font-weight:bold;color:#c0392b;margin-right:10px}
+.num{display:flex;gap:6px}
+.num button{width:32px;height:32px;border:none;background:#3498db;color:white;border-radius:50%}
+.cart{margin-top:20px;padding:15px;background:#f8f9fa;border-radius:10px}
+.total{font-weight:bold;font-size:16px;margin:10px 0}
+input,select{width:100%;padding:8px;margin:5px 0;border:1px solid #ddd;border-radius:6px}
+.btn{width:100%;padding:12px;background:#2980b9;color:white;border:none;border-radius:10px;font-weight:bold;margin-top:10px}
 </style>
 </head>
 <body>
 
 <div class="box">
-  <div class="title">🍚 台灣早餐 & 鹹酥雞</div>
+  <h2 style="text-align:center">🍚 台灣小吃點餐</h2>
 
-  <!-- 主食 -->
-  <div class="cate">主食 / Món chính</div>
-
-  <div class="food" data-name="蛋餅" data-price="30000">
-    <img src="蛋餅.jpg">
-    <div class="info">
-      <div class="name">蛋餅</div>
-      <div class="vn">Bánh trứng rán</div>
-    </div>
-    <div class="price">30.000₫</div>
-    <div class="num">
-      <button onclick="del(this)">-</button>
-      <span>0</span>
-      <button onclick="add(this)">+</button>
-    </div>
-  </div>
-
-  <div class="food" data-name="飯糰" data-price="25000">
-    <img src="飯糰.jpg">
-    <div class="info">
-      <div class="name">飯糰</div>
-      <div class="vn">Cơm cuộn</div>
-    </div>
-    <div class="price">25.000₫</div>
-    <div class="num">
-      <button onclick="del(this)">-</button>
-      <span>0</span>
-      <button onclick="add(this)">+</button>
-    </div>
-  </div>
-
-  <div class="food" data-name="燒肉飯" data-price="45000">
-    <img src="燒肉飯.jpg">
-    <div class="info">
-      <div class="name">燒肉飯</div>
-      <div class="vn">Cơm thịt nướng</div>
-    </div>
-    <div class="price">45.000₫</div>
-    <div class="num">
-      <button onclick="del(this)">-</button>
-      <span>0</span>
-      <button onclick="add(this)">+</button>
-    </div>
-  </div>
-
-  <div class="food" data-name="滷肉飯" data-price="40000">
-    <img src="滷肉飯.jpg">
-    <div class="info">
-      <div class="name">滷肉飯</div>
-      <div class="vn">Cơm thịt kho</div>
-    </div>
-    <div class="price">40.000₫</div>
-    <div class="num">
-      <button onclick="del(this)">-</button>
-      <span>0</span>
-      <button onclick="add(this)">+</button>
-    </div>
-  </div>
-
-  <div class="food" data-name="炒麵" data-price="38000">
-    <img src="炒麵.jpg">
-    <div class="info">
-      <div class="name">炒麵</div>
-      <div class="vn">Mì xào</div>
-    </div>
-    <div class="price">38.000₫</div>
-    <div class="num">
-      <button onclick="del(this)">-</button>
-      <span>0</span>
-      <button onclick="add(this)">+</button>
-    </div>
-  </div>
-
-  <div class="food" data-name="鹹豆漿" data-price="25000">
-    <img src="鹹豆漿.jpg">
-    <div class="info">
-      <div class="name">鹹豆漿</div>
-      <div class="vn">Sữa đậu nành mặn</div>
-    </div>
-    <div class="price">25.000₫</div>
-    <div class="num">
-      <button onclick="del(this)">-</button>
-      <span>0</span>
-      <button onclick="add(this)">+</button>
-    </div>
-  </div>
-
-  <!-- 炸物 -->
-  <div class="cate">炸物鹹酥雞 / Món chiên</div>
-
-  <div class="food" data-name="鹹酥雞" data-price="35000">
-    <img src="鹹酥雞.jpg">
-    <div class="info">
-      <div class="name">鹹酥雞</div>
-      <div class="vn">Gà rán muối tiêu</div>
-    </div>
-    <div class="price">35.000₫</div>
-    <div class="num">
-      <button onclick="del(this)">-</button>
-      <span>0</span>
-      <button onclick="add(this)">+</button>
-    </div>
-  </div>
-
-  <div class="food" data-name="炸豆腐" data-price="25000">
-    <img src="炸豆腐.jpg">
-    <div class="info">
-      <div class="name">炸豆腐</div>
-      <div class="vn">Đậu phụ rán</div>
-    </div>
-    <div class="price">25.000₫</div>
-    <div class="num">
-      <button onclick="del(this)">-</button>
-      <span>0</span>
-      <button onclick="add(this)">+</button>
-    </div>
-  </div>
-
-  <div class="food" data-name="炸魚板" data-price="28000">
-    <img src="炸魚板.jpg">
-    <div class="info">
-      <div class="name">炸魚板</div>
-      <div class="vn">Bánh cá rán</div>
-    </div>
-    <div class="price">28.000₫</div>
-    <div class="num">
-      <button onclick="del(this)">-</button>
-      <span>0</span>
-      <button onclick="add(this)">+</button>
-    </div>
-  </div>
-
-  <div class="food" data-name="炸甜不辣" data-price="28000">
-    <img src="炸甜不辣.jpg">
-    <div class="info">
-      <div class="name">炸甜不辣</div>
-      <div class="vn">Thiên bạt rán</div>
-    </div>
-    <div class="price">28.000₫</div>
-    <div class="num">
-      <button onclick="del(this)">-</button>
-      <span>0</span>
-      <button onclick="add(this)">+</button>
-    </div>
-  </div>
-
-  <div class="food" data-name="炸米血糕" data-price="28000">
-    <img src="炸米血糕.jpg">
-    <div class="info">
-      <div class="name">炸米血糕</div>
-      <div class="vn">Bánh gạo huyết rán</div>
-    </div>
-    <div class="price">28.000₫</div>
-    <div class="num">
-      <button onclick="del(this)">-</button>
-      <span>0</span>
-      <button onclick="add(this)">+</button>
-    </div>
-  </div>
-
-  <div class="food" data-name="炸四季豆" data-price="25000">
-    <img src="炸四季豆.jpg">
-    <div class="info">
-      <div class="name">炸四季豆</div>
-      <div class="vn">Đậu đũa rán</div>
-    </div>
-    <div class="price">25.000₫</div>
-    <div class="num">
-      <button onclick="del(this)">-</button>
-      <span>0</span>
-      <button onclick="add(this)">+</button>
-    </div>
-  </div>
-
-  <div class="food" data-name="炸花椰菜" data-price="25000">
-    <img src="炸花椰菜.jpg">
-    <div class="info">
-      <div class="name">炸花椰菜</div>
-      <div class="vn">Bông cải xanh rán</div>
-    </div>
-    <div class="price">25.000₫</div>
-    <div class="num">
-      <button onclick="del(this)">-</button>
-      <span>0</span>
-      <button onclick="add(this)">+</button>
-    </div>
-  </div>
-
-  <div class="food" data-name="炸皮蛋" data-price="29000">
-    <img src="炸皮蛋.jpg">
-    <div class="info">
-      <div class="name">炸皮蛋</div>
-      <div class="vn">Trứng bắc thảo rán</div>
-    </div>
-    <div class="price">29.000₫</div>
-    <div class="num">
-      <button onclick="del(this)">-</button>
-      <span>0</span>
-      <button onclick="add(this)">+</button>
-    </div>
-  </div>
-
-  <div class="food" data-name="炸魷魚鬚" data-price="38000">
-    <img src="炸魷魚鬚.jpg">
-    <div class="info">
-      <div class="name">炸魷魚鬚</div>
-      <div class="vn">Râu mực rán</div>
-    </div>
-    <div class="price">38.000₫</div>
-    <div class="num">
-      <button onclick="del(this)">-</button>
-      <span>0</span>
-      <button onclick="add(this)">+</button>
-    </div>
-  </div>
-
-  <!-- 湯飲 -->
-  <div class="cate">湯飲 / Đồ uống & Canh</div>
-
-  <div class="food" data-name="季節湯" data-price="25000">
-    <img src="季節湯.jpg">
-    <div class="info">
-      <div class="name">季節湯</div>
-      <div class="vn">Súp mùa</div>
-    </div>
-    <div class="price">25.000₫</div>
-    <div class="num">
-      <button onclick="del(this)">-</button>
-      <span>0</span>
-      <button onclick="add(this)">+</button>
-    </div>
-  </div>
-
-  <div class="food" data-name="豆漿" data-price="18000">
-    <img src="豆漿.jpg">
+  <div class="item" data-name="豆漿" data-price="18000">
+    < img src="豆漿.jpg">
     <div class="info">
       <div class="name">豆漿</div>
       <div class="vn">Sữa đậu nành</div>
@@ -281,8 +40,8 @@
     </div>
   </div>
 
-  <div class="food" data-name="洛神花茶" data-price="22000">
-    <img src="洛神花茶.jpg">
+  <div class="item" data-name="洛神花茶" data-price="22000">
+    < img src="洛神花茶.jpg">
     <div class="info">
       <div class="name">洛神花茶</div>
       <div class="vn">Trà hoa lạc thần</div>
@@ -295,141 +54,87 @@
     </div>
   </div>
 
-  <!-- 購物車 -->
   <div class="cart">
-    <div class="cart-title">🛒 訂單 / Đơn hàng</div>
+    <div><b>訂單</b></div>
     <div id="list"></div>
-    <div class="total">總計 / Tổng tiền: <span id="total">0</span> ₫</div>
+    <div class="total">總金額：<span id="total">0</span> ₫</div>
 
-    <!-- 顧客資訊 -->
-    <div class="customer-info">
-      <label>姓名 / Họ tên:</label>
-      <input type="text" id="customerName" placeholder="請輸入姓名">
-      <label>電話 / Số điện thoại:</label>
-      <input type="tel" id="customerPhone" placeholder="請輸入電話號碼">
-      <label>住址 / Địa chỉ:</label>
-      <input type="text" id="customerAddr" placeholder="請輸入住址">
-      <label>付款方式 / Phương thức thanh toán:</label>
-      <select id="payMethod">
-        <option value="現金">現金 / Tiền mặt</option>
-        <option value="轉帳">轉帳 / Chuyển khoản</option>
-      </select>
-      <label>取餐方式 / Phương thức nhận hàng:</label>
-      <select id="pickupMethod">
-        <option value="自取">自取 / Tự lấy</option>
-        <option value="外送">外送 / Giao hàng</option>
-      </select>
-    </div>
+    <input type="text" id="name" placeholder="姓名 / Họ tên">
+    <input type="text" id="phone" placeholder="電話 / SĐT">
+    <input type="text" id="addr" placeholder="住址 / Địa chỉ">
 
-    <button class="btn-send" onclick="sendOrder()">Gửi đơn hàng</button>
+    <button class="btn" onclick="send()">送出訂單 / Gửi đơn</button>
   </div>
 </div>
 
 <script>
 let order = {}
 
-const GOOGLE_URL = "https://script.google.com/macros/s/AKfycbzANEH-GbGkcscfmi4EW9Prfvrxj6gfvMZH_e3mkRokHh_r_lONTVdb1ULTKcKEcOqZ/exec";
-const EMAIL = "big177tw@gmail.com";
-
-function add(el) {
-  let food = el.closest(".food");
-  let name = food.dataset.name;
-  let price = +food.dataset.price;
-  let numEl = el.previousElementSibling;
-  let n = +numEl.textContent + 1;
-  numEl.textContent = n;
-  order[name] = { n: n, p: price };
-  updateCart();
+function add(el){
+  let it = el.closest(".item");
+  let name = it.dataset.name;
+  let p = Number(it.dataset.price);
+  let n = Number(el.previousElementSibling.textContent)+1;
+  el.previousElementSibling.textContent = n;
+  order[name] = {n:n, p:p};
+  up();
 }
 
-function del(el) {
-  let food = el.closest(".food");
-  let name = food.dataset.name;
-  let numEl = el.nextElementSibling;
-  let n = Math.max(0, +numEl.textContent - 1);
-  numEl.textContent = n;
-  if (n === 0) {
-    delete order[name];
-  } else {
-    order[name] = { n: n, p: +food.dataset.price };
-  }
-  updateCart();
+function del(el){
+  let it = el.closest(".item");
+  let name = it.dataset.name;
+  let n = Math.max(0, Number(el.nextElementSibling.textContent)-1);
+  el.nextElementSibling.textContent = n;
+  if(n===0) delete order[name];
+  else order[name] = {n:n, p:Number(it.dataset.price)};
+  up();
 }
 
-function updateCart() {
+function up(){
   let list = document.getElementById("list");
   let total = document.getElementById("total");
   list.innerHTML = "";
   let sum = 0;
-  for (let k in order) {
-    let it = order[k];
-    let subt = it.n * it.p;
+  for(let k in order){
+    let o = order[k];
+    let subt = o.n*o.p;
     sum += subt;
-    list.innerHTML += `<div>${k} × ${it.n} = ${subt.toLocaleString()} ₫</div>`;
+    list.innerHTML += k + " ×"+o.n+" = "+subt.toLocaleString()+"₫<br>";
   }
   total.textContent = sum.toLocaleString();
 }
 
-// ✅ 终极版 sendOrder：直接拼完整邮件内容，绕开所有模板/缓存问题
-async function sendOrder() {
-  if (Object.keys(order).length === 0) {
-    alert("Vui lòng chọn món / 請先選商品");
+// 最穩定、最簡單、一定會有內容的寄信方式
+function send(){
+  if(Object.keys(order).length === 0){
+    alert("請先選商品");
     return;
   }
 
-  let name = document.getElementById("customerName").value || "未填寫";
-  let phone = document.getElementById("customerPhone").value || "未填寫";
-  let addr = document.getElementById("customerAddr").value || "未填寫";
-  let payMethod = document.getElementById("payMethod").value;
-  let pickupMethod = document.getElementById("pickupMethod").value;
+  let name = document.getElementById("name").value || "無";
+  let phone = document.getElementById("phone").value || "無";
+  let addr = document.getElementById("addr").value || "無";
 
-  // 直接拼接完整邮件正文
-  let mailBody = `【台灣小吃店】新訂單通知
-時間：${new Date().toString()}
-
-顧客資訊：
-姓名：${name}
-電話：${phone}
-住址：${addr}
-付款方式：${payMethod}
-取餐方式：${pickupMethod}
-
-點餐內容：`;
+  // 直接組成最簡單文字，不搞複雜編碼
+  let txt = "新訂單\n";
+  txt += "姓名: "+name+"\n";
+  txt += "電話: "+phone+"\n";
+  txt += "住址: "+addr+"\n\n";
+  txt += "點餐:\n";
 
   let total = 0;
-  for (let k in order) {
-    let it = order[k];
-    let subt = it.n * it.p;
+  for(let k in order){
+    let o = order[k];
+    let subt = o.n*o.p;
     total += subt;
-    mailBody += `\n${k} × ${it.n} = ${subt.toLocaleString()} ₫`;
+    txt += k + " ×"+o.n+" = "+subt.toLocaleString()+"₫\n";
   }
-  mailBody += `\n\n總價：${total.toLocaleString()} ₫`;
+  txt += "\n總金額: "+total.toLocaleString()+"₫";
 
-  // 发送到 Google 表格
-  try {
-    await fetch(GOOGLE_URL, {
-      method: "POST",
-      body: JSON.stringify({ text: mailBody, total: total })
-    });
-  } catch (e) {
-    console.error("表格同步失败:", e);
-  }
-
-  // 强制发送完整邮件
-  let mailUrl = `mailto:${EMAIL}?subject=【台灣小吃店】新訂單&body=${encodeURIComponent(mailBody)}`;
-  window.open(mailUrl, "_blank");
-
-  alert("✅ Đơn hàng đã gửi thành công!\n訂單已傳送成功");
-  
-  // 清空购物车
-  order = {};
-  document.querySelectorAll(".num span").forEach(s => s.textContent = 0);
-  document.getElementById("customerName").value = "";
-  document.getElementById("customerPhone").value = "";
-  document.getElementById("customerAddr").value = "";
-  document.getElementById("payMethod").value = "現金";
-  document.getElementById("pickupMethod").value = "自取";
-  updateCart();
+  // 最簡單 mailto，Gmail 一定吃得到
+  let url = "mailto:big177tw@gmail.com?subject=新訂單&body=" + encodeURIComponent(txt);
+  window.open(url);
+  alert("已開啟郵件，請按傳送");
 }
 </script>
 </body>
