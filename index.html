@@ -175,16 +175,15 @@ function order(){
   });
   let total = document.getElementById('total').innerText;
 
-  // 直接彈出訂單+轉帳資訊，不會報連線錯誤
-  alert(`✅ 下單成功！
+  // 已替換成你的 Web app URL
+  fetch("https://script.google.com/macros/s/AKfycbwwsxZaYSudpYvopcwCg-B0DtnUu33MgXkvXCSLEtJ0jgx2FDb1ocIbhyMujqmfhYck/exec", {
+    method: "POST",
+    body: JSON.stringify({name, phone, address, items: items.join("，"), total, payType, type})
+  })
+  .then(res=>res.json())
+  .then(data=>{
+    alert(`✅ 下單成功！
 Đặt hàng thành công!
-
-📝 訂單資訊：
-• 姓名：${name}
-• 電話：${phone}
-• 取餐方式：${type}
-• 點餐：${items.join("，")}
-• 總價：${total}
 
 💳 CHUYỂN KHOẢN:
 • Ngân hàng: VIETCOMBANK
@@ -193,7 +192,11 @@ function order(){
 • Nội dung: Ghi tên bạn
 
 📞 Liên hệ: 0971965420`);
-  location.reload();
+    location.reload();
+  })
+  .catch(err=>{
+    alert("⚠️ 下單失敗，請稍後再試！\nĐặt hàng thất bại, vui lòng thử lại sau!");
+  });
 }
 </script>
 </body>
