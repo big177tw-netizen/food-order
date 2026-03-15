@@ -1,202 +1,283 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>台灣小吃店 - Đặt hàng online</title>
+<title>台灣小吃店 - QUÁN ĂN NHẸ ĐÀI LOAN</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
-body{background:#f7f5f2;padding:15px;max-width:500px;margin:0 auto;padding-bottom:140px;}
-.header{text-align:center;margin:20px 0;}
-.shopname{font-size:26px;font-weight:bold;color:#c0392b;}
-.subtitle{font-size:14px;color:#666;margin-top:5px;}
-.tab{display:flex;background:#fff;border-radius:10px;padding:8px;margin-bottom:15px;gap:5px;}
-.tab button{flex:1;padding:10px;border:none;border-radius:8px;background:#f1f1f1;font-size:14px;font-weight:bold;}
-.tab button.active{background:#c0392b;color:#fff;}
-.box{background:#fff;border-radius:12px;padding:18px;margin-bottom:15px;box-shadow:0 2px 5px rgba(0,0,0,0.08);}
-.boxtitle{font-size:18px;font-weight:bold;border-left:5px solid #c0392b;padding-left:10px;margin-bottom:15px;}
-.item{display:flex;align-items:center;padding:10px 0;border-bottom:1px solid #f2f2f2;gap:12px;}
-.item:last-child{border-bottom:none;}
-.item-img{width:70px;height:70px;border-radius:8px;object-fit:cover;}
-.info{flex:1;}
-.cn{font-size:16px;font-weight:bold;}
-.vn{font-size:12px;color:#777;margin-top:3px;}
-.price{font-size:16px;font-weight:bold;color:#c0392b;margin-right:10px;}
-.ctrl{display:flex;align-items:center;gap:8px;}
-.ctrl button{width:30px;height:30px;border:none;border-radius:50%;background:#f2f2f1;font-size:16px;}
-.bar{position:fixed;bottom:0;left:0;right:0;background:#fff;padding:15px;box-shadow:0 -2px 10px rgba(0,0,0,0.1);max-width:500px;margin:0 auto;}
-.total{display:flex;justify-content:space-between;margin-bottom:10px;font-size:18px;font-weight:bold;}
-.checkout{width:100%;padding:14px;background:#c0392b;color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:bold;}
-.form{display:none;}
-.form input,.form select{width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:8px;font-size:14px;}
-.form input.error{border:2px solid #e74c3c;background:#fdf2f2;}
-.form label{font-size:12px;color:#666;}
-.send{width:100%;padding:14px;background:#27ae60;color:#fff;border:none;border-radius:12px;margin-top:10px;}
+* {margin:0;padding:0;box-sizing:border-box;font-family:微軟正黑體,sans-serif}
+body{background:#f8f5f0;padding:30px 20px}
+.container{max-width:600px;margin:0 auto}
+.header-title{text-align:center;margin-bottom:20px}
+.header-title h1{font-size:24px;color:#b33c24;margin-bottom:8px}
+.header-title p{font-size:14px;color:#666}
+.order-type{display:flex;gap:8px;margin-bottom:20px}
+.order-type button{flex:1;padding:10px;border:none;border-radius:6px;font-size:14px;cursor:pointer}
+.order-type button.active{background:#b33c24;color:#fff}
+.order-type button:not(.active){background:#f0f0f0;color:#333}
+.category{background:#fff;border-radius:10px;padding:15px;margin-bottom:15px;box-shadow:0 2px 4px rgba(0,0,0,.05)}
+.category-title{font-size:18px;font-weight:bold;color:#333;margin-bottom:15px;padding-left:10px;border-left:4px solid #b33c24}
+.item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #f0f0f0}
+.item:last-child{border-bottom:0}
+.item-img{width:60px;height:60px;border-radius:8px;object-fit:cover}
+.item-info{flex:1}
+.item-name{font-size:16px;font-weight:500;margin-bottom:3px}
+.item-name-vn{font-size:13px;color:#666;font-style:italic}
+.item-price{font-size:16px;font-weight:bold;color:#b33c24;margin-right:10px}
+.item-ctrl{display:flex;align-items:center;gap:8px}
+.item-ctrl button{width:26px;height:26px;border:none;border-radius:50%;background:#f0f0f0;font-size:16px;cursor:pointer}
+.item-ctrl span{font-size:15px;min-width:20px;text-align:center}
+.footer{background:#fff;border-radius:10px;padding:15px;margin-top:20px;box-shadow:0 2px 4px rgba(0,0,0,.05)}
+.total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
+.total-label{font-size:16px;font-weight:500}
+.total-price{font-size:18px;font-weight:bold;color:#333}
+.checkout-btn{width:100%;padding:12px;border:none;border-radius:6px;background:#b33c24;color:#fff;font-size:16px;font-weight:bold;cursor:pointer}
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);justify-content:center;align-items:center;z-index:100}
+.modal-content{background:#fff;padding:25px;border-radius:10px;max-width:340px;width:90%;text-align:center}
+.modal-title{font-size:18px;font-weight:bold;margin-bottom:15px;color:#b33c24}
+.modal-text{font-size:15px;margin-bottom:20px;color:#333;line-height:1.6}
+.modal-input{width:100%;padding:10px;margin:8px 0;border:1px solid #ddd;border-radius:6px;font-size:15px}
+.modal-btn{padding:10px 25px;border:none;border-radius:6px;background:#b33c24;color:#fff;font-size:15px;cursor:pointer}
+.pay-type{display:flex;gap:10px;margin-bottom:20px;justify-content:center}
+.pay-type button{flex:1;padding:10px;border:1px solid #b33c24;border-radius:6px;background:#fff;color:#b33c24;font-size:14px;cursor:pointer}
+.pay-type button.active{background:#b33c24;color:#fff}
 </style>
 </head>
 <body>
-
-<div class="header">
-  <div class="shopname">台灣小吃店 - QUÁN ĂN NHẸ ĐÀI LOAN</div>
-  <div class="subtitle">線上點餐 | Đặt hàng online</div>
-</div>
-
-<div class="tab">
-  <button class="active" onclick="tab(1)">內用 - Tại nhà hàng</button>
-  <button onclick="tab(2)">自取 - Mang về</button>
-  <button onclick="tab(3)">外送 - Giao hàng</button>
-</div>
-
-<div class="box">
-  <div class="boxtitle">主食 - Món chính</div>
-  <div class="item">
-    <img class="item-img" src="https://picsum.photos/id/102/300/300">
-    <div class="info"><div class="cn">滷肉飯</div><div class="vn">Cơm thịt kho</div></div>
-    <div class="price">65.000đ</div>
-    <div class="ctrl"><button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button></div>
+<div class="container">
+  <div class="header-title">
+    <h1>台灣小吃店 - QUÁN ĂN NHẸ ĐÀI LOAN</h1>
+    <p>線上點餐 | Đặt hàng online</p>
   </div>
-  <div class="item">
-    <img class="item-img" src="https://picsum.photos/id/292/300/300">
-    <div class="info"><div class="cn">牛肉麵</div><div class="vn">Mì bò</div></div>
-    <div class="price">130.000đ</div>
-    <div class="ctrl"><button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button></div>
+
+  <div class="order-type">
+    <button class="active" onclick="changeOrderType(this, '內用')">內用 - Tại nhà</button>
+    <button onclick="changeOrderType(this, '自取')">自取 - Mang về</button>
+    <button onclick="changeOrderType(this, '外送')">外送 - Giao hàng</button>
+  </div>
+
+  <!-- 早餐 -->
+  <div class="category">
+    <div class="category-title">早餐 - Bữa sáng</div>
+    <div class="item" data-price="45000">
+      <img class="item-img" src="https://picsum.photos/id/306/300/300">
+      <div class="item-info">
+        <div class="item-name">蛋餅</div>
+        <div class="item-name-vn">Bánh trứng rán</div>
+      </div>
+      <div class="item-price">45.000₫</div>
+      <div class="item-ctrl">
+        <button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button>
+      </div>
+    </div>
+    <div class="item" data-price="50000">
+      <img class="item-img" src="https://picsum.photos/id/292/300/300">
+      <div class="item-info">
+        <div class="item-name">飯糰</div>
+        <div class="item-name-vn">Cơm nắm</div>
+      </div>
+      <div class="item-price">50.000₫</div>
+      <div class="item-ctrl">
+        <button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 午餐 -->
+  <div class="category">
+    <div class="category-title">午餐 - Bữa trưa</div>
+    <div class="item" data-price="65000">
+      <img class="item-img" src="https://picsum.photos/id/1080/300/300">
+      <div class="item-info">
+        <div class="item-name">燒肉飯</div>
+        <div class="item-name-vn">Cơm thịt nướng</div>
+      </div>
+      <div class="item-price">65.000₫</div>
+      <div class="item-ctrl">
+        <button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button>
+      </div>
+    </div>
+    <div class="item" data-price="60000">
+      <img class="item-img" src="https://picsum.photos/id/324/300/300">
+      <div class="item-info">
+        <div class="item-name">滷肉飯</div>
+        <div class="item-name-vn">Cơm thịt kho</div>
+      </div>
+      <div class="item-price">60.000₫</div>
+      <div class="item-ctrl">
+        <button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 炸類 -->
+  <div class="category">
+    <div class="category-title">炸類 - Món chiên</div>
+    <div class="item" data-price="80000">
+      <img class="item-img" src="https://picsum.photos/id/488/300/300">
+      <div class="item-info">
+        <div class="item-name">鹹酥雞</div>
+        <div class="item-name-vn">Gà chiên muối</div>
+      </div>
+      <div class="item-price">80.000₫</div>
+      <div class="item-ctrl">
+        <button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="total-row">
+      <div class="total-label">合計 - Tổng:</div>
+      <div class="total-price" id="totalPrice">0₫</div>
+    </div>
+    <button class="checkout-btn" onclick="checkout()">結帳 - Thanh toán</button>
   </div>
 </div>
 
-<div class="box">
-  <div class="boxtitle">小吃 - Món ăn nhẹ</div>
-  <div class="item">
-    <img class="item-img" src="https://picsum.photos/id/488/300/300">
-    <div class="info"><div class="cn">鹽酥雞</div><div class="vn">Gà chiên muối</div></div>
-    <div class="price">80.000đ</div>
-    <div class="ctrl"><button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button></div>
+<!-- 外送地址電話 -->
+<div class="modal" id="deliveryModal">
+  <div class="modal-content">
+    <div class="modal-title">外送資訊 - Thông tin giao hàng</div>
+    <input class="modal-input" id="addr" placeholder="住址 - Địa chỉ">
+    <input class="modal-input" id="phone" placeholder="電話 - Số điện thoại">
+    <button class="modal-btn" onclick="submitDelivery()">確認 - Xác nhận</button>
   </div>
 </div>
 
-<div class="box">
-  <div class="boxtitle">飲料 - Đồ uống</div>
-  <div class="item">
-    <img class="item-img" src="https://picsum.photos/id/141/300/300">
-    <div class="info"><div class="cn">冬瓜茶</div><div class="vn">Trà bí đao</div></div>
-    <div class="price">30.000đ</div>
-    <div class="ctrl"><button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button></div>
+<!-- 支付方式 -->
+<div class="modal" id="payModal">
+  <div class="modal-content">
+    <div class="modal-title">支付方式 - Thanh toán</div>
+    <div class="pay-type">
+      <button onclick="setPay(this,'現金')">現金</button>
+      <button onclick="setPay(this,'貨到付款')">貨到付款</button>
+    </div>
+    <button class="modal-btn" onclick="goPay()">確認</button>
   </div>
 </div>
 
-<div class="box form" id="form">
-  <div class="boxtitle">結帳資料 - Thông tin thanh toán</div>
-  <select id="type">
-    <option>內用 - Tại nhà hàng</option>
-    <option>自取 - Mang về</option>
-    <option>外送 - Giao hàng</option>
-  </select>
-  <label>付款方式 - Hình thức thanh toán</label>
-  <select id="payType">
-    <option>現金 - Tiền mặt</option>
-    <option>轉帳 - Chuyển khoản</option>
-    <option>貨到付款 - Thanh toán khi nhận hàng</option>
-  </select>
-  <div><label>電話 (外送必填) / SĐT</label><input type="text" id="phone" placeholder="Số điện thoại"></div>
-  <div><label>住址 (外送必填) / Địa chỉ</label><input type="text" id="address" placeholder="Địa chỉ giao hàng"></div>
-  <input type="text" placeholder="姓名 - Họ tên">
-  <input type="text" placeholder="備註 - Ghi chú">
-  <div class="total"><div>合計 - Tổng:</div><div id="showtotal">0đ</div></div>
-  <button class="send" onclick="order()">確認下單 - Xác nhận đặt hàng</button>
-</div>
-
-<div class="bar">
-  <div class="total"><div>合計 - Tổng:</div><div id="total">0đ</div></div>
-  <button class="checkout" onclick="showform()">前往結帳 - Thanh toán</button>
+<!-- 成功 -->
+<div class="modal" id="successModal">
+  <div class="modal-content">
+    <div class="modal-title">下單成功!</div>
+    <div class="modal-text" id="successTxt"></div>
+    <button class="modal-btn" onclick="closeAll()">確認</button>
+  </div>
 </div>
 
 <script>
-var type = "內用 - Tại nhà hàng";
+let orderType = "內用";
+let payType = "";
+let orderNo = 1;
+let addr = "", phone = "";
 
-function tab(n){
-  let btns = document.querySelectorAll('.tab button');
-  btns.forEach(b=>b.classList.remove('active'));
-  btns[n-1].classList.add('active');
-  type = btns[n-1].innerText;
-  document.getElementById('type').value = type;
+// 切換內用/自取/外送
+function changeOrderType(btn, t){
+  document.querySelectorAll('.order-type button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  orderType = t;
 }
 
-function up(e){
-  let num = e.parentElement.querySelector('span');
-  num.innerText = parseInt(num.innerText)+1;
-  count();
-}
-function down(e){
-  let num = e.parentElement.querySelector('span');
-  if(num.innerText>0) num.innerText = parseInt(num.innerText)-1;
-  count();
-}
+// 加減數量
+function up(el){el.previousElementSibling.textContent = +el.previousElementSibling.textContent+1; cal()}
+function down(el){if(+el.nextElementSibling.textContent>0)el.nextElementSibling.textContent--; cal()}
 
-function count(){
-  let total = 0;
+// 算金額
+function cal(){
+  let total=0;
   document.querySelectorAll('.item').forEach(i=>{
-    let p = i.querySelector('.price').innerText.replace(/\D/g,'');
-    let n = i.querySelector('.ctrl span').innerText;
-    total += parseInt(p||0)*parseInt(n||0);
+    let p=+i.dataset.price, c=+i.querySelector('.item-ctrl span').textContent;
+    total += p*c;
   });
-  document.getElementById('total').innerText = total.toLocaleString() + 'đ';
+  document.getElementById('totalPrice').textContent = total.toLocaleString('vi-VN') + '₫';
 }
 
-function showform(){
-  document.getElementById('form').style.display='block';
-  document.getElementById('showtotal').innerText = document.getElementById('total').innerText;
-  document.getElementById('type').value = type;
-}
+// 結帳按鈕
+function checkout(){
+  let total = document.getElementById('totalPrice').textContent.replace(/\D/g,'');
+  if(total==0){alert('請選商品'); return;}
 
-function order(){
-  let type = document.getElementById('type').value;
-  let phone = document.getElementById('phone').value.trim();
-  let address = document.getElementById('address').value.trim();
-  let payType = document.getElementById('payType').value;
-  let name = document.querySelector('input[placeholder="姓名 - Họ tên"]').value.trim();
-
-  let isDelivery = type.includes("外送") || type.includes("Giao");
-  let err = false;
-  document.getElementById('phone').classList.remove('error');
-  document.getElementById('address').classList.remove('error');
-
-  if(isDelivery){
-    if(!phone){ document.getElementById('phone').classList.add('error'); err=true; }
-    if(!address){ document.getElementById('address').classList.add('error'); err=true; }
-  }
-  if(err){
-    alert("外送必須填電話與住址！\nGiao hàng phải nhập SĐT và địa chỉ!");
+  // 如果是外送 → 先填地址電話
+  if(orderType=="外送"){
+    document.getElementById('deliveryModal').style.display='flex';
     return;
   }
+  openPay();
+}
 
+// 提交外送資訊
+function submitDelivery(){
+  addr = document.getElementById('addr').value.trim();
+  phone = document.getElementById('phone').value.trim();
+  if(!addr || !phone){alert('請填住址與電話'); return;}
+  document.getElementById('deliveryModal').style.display='none';
+  openPay();
+}
+
+// 開支付視窗
+function openPay(){
+  payType="";
+  document.querySelectorAll('.pay-type button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('payModal').style.display='flex';
+}
+
+function setPay(btn,t){
+  document.querySelectorAll('.pay-type button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  payType = t;
+}
+
+// 確認下單 → 傳送後台
+function goPay(){
+  if(!payType){alert('選支付方式'); return;}
+  document.getElementById('payModal').style.display='none';
+
+  let total = +document.getElementById('totalPrice').textContent.replace(/\D/g,'');
   let items = [];
   document.querySelectorAll('.item').forEach(i=>{
-    let c = i.querySelector('.ctrl span').innerText;
-    if(c>0) items.push(i.querySelector('.cn').innerText + " x"+c);
+    let n = i.querySelector('.item-name').textContent;
+    let p = +i.dataset.price;
+    let c = +i.querySelector('.item-ctrl span').textContent;
+    if(c>0) items.push({name:n, price:p, qty:c});
   });
-  let total = document.getElementById('total').innerText;
 
-  // 已替換成你的 Web app URL
-  fetch("https://script.google.com/macros/s/AKfycbwwsxZaYSudpYvopcwCg-B0DtnUu33MgXkvXCSLEtJ0jgx2FDb1ocIbhyMujqmfhYck/exec", {
-    method: "POST",
-    body: JSON.stringify({name, phone, address, items: items.join("，"), total, payType, type})
-  })
-  .then(res=>res.json())
-  .then(data=>{
-    alert(`✅ 下單成功！
-Đặt hàng thành công!
+  // 組訂單資訊
+  let order = {
+    orderNo: orderNo,
+    type: orderType,
+    pay: payType,
+    addr: addr,
+    phone: phone,
+    total: total,
+    items: items,
+    time: new Date().toLocaleString()
+  };
 
-💳 CHUYỂN KHOẢN:
-• Ngân hàng: VIETCOMBANK
-• Số tài khoản: 9704368684146657056
-• Tên chủ TK: VO TRAN
-• Nội dung: Ghi tên bạn
-
-📞 Liên hệ: 0971965420`);
-    location.reload();
-  })
-  .catch(err=>{
-    alert("⚠️ 下單失敗，請稍後再試！\nĐặt hàng thất bại, vui lòng thử lại sau!");
+  // 傳送給後台
+  fetch('get_orders.php',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(order)
   });
+
+  // 顯示成功
+  let txt = `訂單號：#${orderNo}\n類型：${orderType}\n支付：${payType}\n`;
+  if(orderType=="外送") txt += `住址：${addr}\n電話：${phone}\n`;
+  txt += `金額：${total.toLocaleString('vi-VN')}₫`;
+
+  document.getElementById('successTxt').textContent = txt;
+  document.getElementById('successModal').style.display='flex';
+
+  // 清空
+  orderNo++;
+  addr=""; phone="";
+  document.querySelectorAll('.item-ctrl span').forEach(s=>s.textContent=0);
+  cal();
+}
+
+function closeAll(){
+  document.getElementById('successModal').style.display='none';
 }
 </script>
 </body>
