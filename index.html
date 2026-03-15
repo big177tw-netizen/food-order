@@ -352,25 +352,28 @@ async function sendOrder() {
     return;
   }
 
-  let text = "";
+  // 組成完整訂單內容（包含菜品明细）
+  let orderText = "【台灣小吃店】新訂單通知\n";
+  orderText += "時間：" + new Date().toString() + "\n\n";
+  orderText += "點餐內容：\n";
   let total = 0;
   for (let k in order) {
     let it = order[k];
     let subt = it.n * it.p;
     total += subt;
-    text += `${k} × ${it.n} = ${subt.toLocaleString()} ₫\n`;
+    orderText += `${k} × ${it.n} = ${subt.toLocaleString()} ₫\n`;
   }
-  text += `\nTổng tiền: ${total.toLocaleString()} ₫`;
+  orderText += `\n總價：${total.toLocaleString()} ₫`;
 
   try {
-    // 傳到 Google 表格
+    // 傳到 Google 表格（包含完整訂單內容）
     await fetch(GOOGLE_URL, {
       method: "POST",
-      body: JSON.stringify({ text: text, total: total })
+      body: JSON.stringify({ text: orderText, total: total })
     });
 
-    // 同時寄信備份到你的 Gmail
-    let mailto = `mailto:${EMAIL}?subject=新訂單-台灣早餐&body=${encodeURIComponent(text)}`;
+    // 同時寄信備份到你的 Gmail（包含完整訂單內容）
+    let mailto = `mailto:${EMAIL}?subject=【台灣小吃店】新訂單通知&body=${encodeURIComponent(orderText)}`;
     window.open(mailto, "_blank");
 
     alert("✅ Đơn hàng đã gửi thành công!\n訂單已傳送成功");
