@@ -5,171 +5,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>台灣小吃店 - Đặt hàng online</title>
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family: Arial, sans-serif;
-}
-body{
-  background:#f7f5f2;
-  padding:15px;
-  max-width:500px;
-  margin:0 auto;
-  padding-bottom:130px;
-}
-.header{
-  text-align:center;
-  margin:20px 0;
-}
-.shopname{
-  font-size:26px;
-  font-weight:bold;
-  color:#c0392b;
-}
-.subtitle{
-  font-size:14px;
-  color:#666;
-  margin-top:5px;
-}
-.tab{
-  display:flex;
-  background:#fff;
-  border-radius:10px;
-  padding:8px;
-  margin-bottom:15px;
-  gap:5px;
-}
-.tab button{
-  flex:1;
-  padding:10px;
-  border:none;
-  border-radius:8px;
-  background:#f1f1f1;
-  font-size:14px;
-  font-weight:bold;
-}
-.tab button.active{
-  background:#c0392b;
-  color:#fff;
-}
-.box{
-  background:#fff;
-  border-radius:12px;
-  padding:18px;
-  margin-bottom:15px;
-  box-shadow:0 2px 5px rgba(0,0,0,0.08);
-}
-.boxtitle{
-  font-size:18px;
-  font-weight:bold;
-  border-left:5px solid #c0392b;
-  padding-left:10px;
-  margin-bottom:15px;
-}
-.item{
-  display:flex;
-  align-items:center;
-  padding:10px 0;
-  border-bottom:1px solid #f2f2f2;
-  gap:12px;
-}
-.item:last-child{
-  border-bottom:none;
-}
-.item-img{
-  width:70px;
-  height:70px;
-  border-radius:8px;
-  object-fit:cover;
-}
-.info{
-  flex:1;
-}
-.cn{
-  font-size:16px;
-  font-weight:bold;
-}
-.vn{
-  font-size:12px;
-  color:#777;
-  margin-top:3px;
-}
-.price{
-  font-size:16px;
-  font-weight:bold;
-  color:#c0392b;
-  margin-right:10px;
-}
-.ctrl{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-.ctrl button{
-  width:30px;
-  height:30px;
-  border:none;
-  border-radius:50%;
-  background:#f2f2f1;
-  font-size:16px;
-}
-.bar{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:#fff;
-  padding:15px;
-  box-shadow:0 -2px 10px rgba(0,0,0,0.1);
-  max-width:500px;
-  margin:0 auto;
-}
-.total{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:10px;
-  font-size:18px;
-  font-weight:bold;
-}
-.checkout{
-  width:100%;
-  padding:14px;
-  background:#c0392b;
-  color:#fff;
-  border:none;
-  border-radius:12px;
-  font-size:16px;
-  font-weight:bold;
-}
-.form{
-  display:none;
-}
-.form input,.form select{
-  width:100%;
-  padding:12px;
-  margin:8px 0;
-  border:1px solid #ddd;
-  border-radius:8px;
-  font-size:14px;
-}
-.form input.error {
-  border:2px solid #e74c3c;
-  background:#fdf2f2;
-}
-.form label {
-  font-size:12px;
-  color:#666;
-}
-.send{
-  width:100%;
-  padding:14px;
-  background:#27ae60;
-  color:#fff;
-  border:none;
-  border-radius:12px;
-  margin-top:10px;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
+body{background:#f7f5f2;padding:15px;max-width:500px;margin:0 auto;padding-bottom:140px;}
+.header{text-align:center;margin:20px 0;}
+.shopname{font-size:26px;font-weight:bold;color:#c0392b;}
+.subtitle{font-size:14px;color:#666;margin-top:5px;}
+.tab{display:flex;background:#fff;border-radius:10px;padding:8px;margin-bottom:15px;gap:5px;}
+.tab button{flex:1;padding:10px;border:none;border-radius:8px;background:#f1f1f1;font-size:14px;font-weight:bold;}
+.tab button.active{background:#c0392b;color:#fff;}
+.box{background:#fff;border-radius:12px;padding:18px;margin-bottom:15px;box-shadow:0 2px 5px rgba(0,0,0,0.08);}
+.boxtitle{font-size:18px;font-weight:bold;border-left:5px solid #c0392b;padding-left:10px;margin-bottom:15px;}
+.item{display:flex;align-items:center;padding:10px 0;border-bottom:1px solid #f2f2f2;gap:12px;}
+.item:last-child{border-bottom:none;}
+.item-img{width:70px;height:70px;border-radius:8px;object-fit:cover;}
+.info{flex:1;}
+.cn{font-size:16px;font-weight:bold;}
+.vn{font-size:12px;color:#777;margin-top:3px;}
+.price{font-size:16px;font-weight:bold;color:#c0392b;margin-right:10px;}
+.ctrl{display:flex;align-items:center;gap:8px;}
+.ctrl button{width:30px;height:30px;border:none;border-radius:50%;background:#f2f2f1;font-size:16px;}
+.bar{position:fixed;bottom:0;left:0;right:0;background:#fff;padding:15px;box-shadow:0 -2px 10px rgba(0,0,0,0.1);max-width:500px;margin:0 auto;}
+.total{display:flex;justify-content:space-between;margin-bottom:10px;font-size:18px;font-weight:bold;}
+.checkout{width:100%;padding:14px;background:#c0392b;color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:bold;}
+.form{display:none;}
+.form input,.form select{width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:8px;font-size:14px;}
+.form input.error{border:2px solid #e74c3c;background:#fdf2f2;}
+.form label{font-size:12px;color:#666;}
+.send{width:100%;padding:14px;background:#27ae60;color:#fff;border:none;border-radius:12px;margin-top:10px;}
 </style>
 </head>
 <body>
@@ -185,121 +47,65 @@ body{
   <button onclick="tab(3)">外送 - Giao hàng</button>
 </div>
 
-<!-- 主食 -->
 <div class="box">
   <div class="boxtitle">主食 - Món chính</div>
-
   <div class="item">
-    <img class="item-img" src="https://i.imgur.com/7D8wV3f.jpg">
-    <div class="info">
-      <div class="cn">滷肉飯</div>
-      <div class="vn">Cơm thịt kho</div>
-    </div>
+    <img class="item-img" src="https://picsum.photos/id/102/300/300">
+    <div class="info"><div class="cn">滷肉飯</div><div class="vn">Cơm thịt kho</div></div>
     <div class="price">65.000đ</div>
-    <div class="ctrl">
-      <button onclick="down(this)">-</button>
-      <span>0</span>
-      <button onclick="up(this)">+</button>
-    </div>
+    <div class="ctrl"><button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button></div>
   </div>
-
   <div class="item">
-    <img class="item-img" src="https://i.imgur.com/T8z0VJx.jpg">
-    <div class="info">
-      <div class="cn">牛肉麵</div>
-      <div class="vn">Mì bò</div>
-    </div>
+    <img class="item-img" src="https://picsum.photos/id/292/300/300">
+    <div class="info"><div class="cn">牛肉麵</div><div class="vn">Mì bò</div></div>
     <div class="price">130.000đ</div>
-    <div class="ctrl">
-      <button onclick="down(this)">-</button>
-      <span>0</span>
-      <button onclick="up(this)">+</button>
-    </div>
+    <div class="ctrl"><button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button></div>
   </div>
 </div>
 
-<!-- 小吃 -->
 <div class="box">
   <div class="boxtitle">小吃 - Món ăn nhẹ</div>
-
   <div class="item">
-    <img class="item-img" src="https://i.imgur.com/3vXW7Lb.jpg">
-    <div class="info">
-      <div class="cn">鹽酥雞</div>
-      <div class="vn">Gà chiên muối</div>
-    </div>
+    <img class="item-img" src="https://picsum.photos/id/488/300/300">
+    <div class="info"><div class="cn">鹽酥雞</div><div class="vn">Gà chiên muối</div></div>
     <div class="price">80.000đ</div>
-    <div class="ctrl">
-      <button onclick="down(this)">-</button>
-      <span>0</span>
-      <button onclick="up(this)">+</button>
-    </div>
+    <div class="ctrl"><button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button></div>
   </div>
 </div>
 
-<!-- 飲料 -->
 <div class="box">
   <div class="boxtitle">飲料 - Đồ uống</div>
-
   <div class="item">
-    <img class="item-img" src="https://i.imgur.com/eF9sQaY.jpg">
-    <div class="info">
-      <div class="cn">冬瓜茶</div>
-      <div class="vn">Trà bí đao</div>
-    </div>
+    <img class="item-img" src="https://picsum.photos/id/141/300/300">
+    <div class="info"><div class="cn">冬瓜茶</div><div class="vn">Trà bí đao</div></div>
     <div class="price">30.000đ</div>
-    <div class="ctrl">
-      <button onclick="down(this)">-</button>
-      <span>0</span>
-      <button onclick="up(this)">+</button>
-    </div>
+    <div class="ctrl"><button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button></div>
   </div>
 </div>
 
-<!-- 結帳表單 -->
 <div class="box form" id="form">
   <div class="boxtitle">結帳資料 - Thông tin thanh toán</div>
-  
   <select id="type">
     <option>內用 - Tại nhà hàng</option>
     <option>自取 - Mang về</option>
     <option>外送 - Giao hàng</option>
   </select>
-
   <label>付款方式 - Hình thức thanh toán</label>
   <select id="payType">
     <option>現金 - Tiền mặt</option>
     <option>轉帳 - Chuyển khoản</option>
     <option>貨到付款 - Thanh toán khi nhận hàng</option>
   </select>
-
-  <div>
-    <label>電話 (外送必填) / SĐT (Bắt buộc giao hàng)</label>
-    <input type="text" id="phone" placeholder="電話 / Số điện thoại">
-  </div>
-
-  <div>
-    <label>住址 (外送必填) / Địa chỉ (Bắt buộc giao hàng)</label>
-    <input type="text" id="address" placeholder="住址 / Địa chỉ giao hàng">
-  </div>
-
+  <div><label>電話 (外送必填) / SĐT</label><input type="text" id="phone" placeholder="Số điện thoại"></div>
+  <div><label>住址 (外送必填) / Địa chỉ</label><input type="text" id="address" placeholder="Địa chỉ giao hàng"></div>
   <input type="text" placeholder="姓名 - Họ tên">
   <input type="text" placeholder="備註 - Ghi chú">
-  
-  <div class="total">
-    <div>合計 - Tổng tiền:</div>
-    <div id="showtotal">0đ</div>
-  </div>
-
+  <div class="total"><div>合計 - Tổng:</div><div id="showtotal">0đ</div></div>
   <button class="send" onclick="order()">確認下單 - Xác nhận đặt hàng</button>
 </div>
 
-<!-- 底部欄 -->
 <div class="bar">
-  <div class="total">
-    <div>合計 - Tổng:</div>
-    <div id="total">0đ</div>
-  </div>
+  <div class="total"><div>合計 - Tổng:</div><div id="total">0đ</div></div>
   <button class="checkout" onclick="showform()">前往結帳 - Thanh toán</button>
 </div>
 
@@ -327,11 +133,10 @@ function down(e){
 
 function count(){
   let total = 0;
-  let items = document.querySelectorAll('.item');
-  items.forEach(i=>{
-    let p = i.querySelector('.price').innerText.replace('đ','').replace(/\./g,'');
+  document.querySelectorAll('.item').forEach(i=>{
+    let p = i.querySelector('.price').innerText.replace(/\D/g,'');
     let n = i.querySelector('.ctrl span').innerText;
-    total += parseInt(p||0) * parseInt(n||0);
+    total += parseInt(p||0)*parseInt(n||0);
   });
   document.getElementById('total').innerText = total.toLocaleString() + 'đ';
 }
@@ -347,35 +152,47 @@ function order(){
   let phone = document.getElementById('phone').value.trim();
   let address = document.getElementById('address').value.trim();
   let payType = document.getElementById('payType').value;
+  let name = document.querySelector('input[placeholder="姓名 - Họ tên"]').value.trim();
 
-  let isDelivery = type.includes("外送") || type.includes("Giao hàng");
-  let hasError = false;
-
+  let isDelivery = type.includes("外送")||type.includes("Giao");
+  let err = false;
   document.getElementById('phone').classList.remove('error');
   document.getElementById('address').classList.remove('error');
 
-  if(isDelivery) {
-    if(!phone){
-      document.getElementById('phone').classList.add('error');
-      hasError = true;
-    }
-    if(!address){
-      document.getElementById('address').classList.add('error');
-      hasError = true;
-    }
+  if(isDelivery){
+    if(!phone){document.getElementById('phone').classList.add('error');err=true;}
+    if(!address){document.getElementById('address').classList.add('error');err=true;}
   }
-
-  if(hasError){
-    alert('外送必須填寫電話與住址！\nGiao hàng phải nhập SĐT và Địa chỉ!');
+  if(err){
+    alert("外送必須填電話與住址！\nGiao hàng phải nhập SĐT và địa chỉ!");
     return;
   }
 
-  alert(
-    '✅ 下單成功！\nĐặt hàng thành công!\n'+
-    '付款方式：'+ payType +'\n'+
-    '我們會盡快處理'
-  );
-  location.reload();
+  let items = [];
+  document.querySelectorAll('.item').forEach(i=>{
+    let c = i.querySelector('.ctrl span').innerText;
+    if(c>0) items.push(i.querySelector('.cn').innerText + " x"+c);
+  });
+  let total = document.getElementById('total').innerText;
+
+  fetch("https://script.google.com/macros/s/AKfycby3vQkE7uN5R1V5kE5fKQJZ9tX7pZ8fFz7zUa8x7wX7wX7w/exec",{
+    method:"POST",
+    body:JSON.stringify({name,phone,address,items:items.join("，"),total,payType,type})
+  }).then(r=>r.json()).then(d=>{
+    alert(`✅ 下單成功！
+Đặt hàng thành công!
+
+💳 CHUYỂN KHOẢN:
+• Ngân hàng: VIETCOMBANK
+• Số tài khoản: 9704368684146657056
+• Tên chủ TK: VO TRAN
+• Nội dung: Ghi tên bạn
+
+📞 Liên hệ: 0971965420`);
+    location.reload();
+  }).catch(e=>{
+    alert("⚠️ Lỗi kết nối, vui lòng thử lại!");
+  });
 }
 </script>
 </body>
