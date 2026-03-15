@@ -3,297 +3,125 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>線上點餐 | Đặt hàng online</title>
+<title>台灣小吃點餐</title>
 <style>
 * {margin:0;padding:0;box-sizing:border-box;font-family:微軟正黑體,sans-serif}
-body{background:#f8f5f0;padding:20px}
-.container{max-width:600px;margin:0 auto;padding-bottom:100px}
-.header-title{text-align:center;margin-bottom:15px}
-.header-title h1{font-size:20px;color:#b33c24}
-.order-type{display:flex;gap:8px;margin-bottom:20px}
-.order-type button{flex:1;padding:10px;border:none;border-radius:6px;font-size:14px;cursor:pointer}
-.order-type button.active{background:#d92b2b;color:#fff}
-.order-type button:not(.active){background:#fff;color:#333}
-.category{background:#fff;border-radius:8px;padding:12px;margin-bottom:12px}
-.category-title{font-size:16px;font-weight:bold;color:#333;margin-bottom:10px;padding-left:8px;border-left:3px solid #d92b2b}
-.item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f0f0f0}
-.item:last-child{border-bottom:0}
-.item-img{width:50px;height:50px;border-radius:6px;object-fit:cover}
+body{background:#f8f5f0;padding:20px;padding-bottom:120px}
+.container{max-width:600px;margin:0 auto}
+.category{background:#fff;border-radius:10px;padding:15px;margin-bottom:15px}
+.category-title{font-size:17px;font-weight:bold;margin-bottom:10px;border-left:4px solid #c41e3a;padding-left:8px}
+.item{display:flex;align-items:center;padding:10px 0;border-bottom:1px solid #eee}
 .item-info{flex:1}
-.item-name{font-size:14px;font-weight:500}
-.item-name-vn{font-size:12px;color:#666}
-.item-price{font-size:14px;font-weight:bold;color:#d92b2b;margin-right:8px}
-.item-ctrl{display:flex;align-items:center;gap:6px}
-.item-ctrl button{width:24px;height:24px;border:none;border-radius:50%;background:#f0f0f0;font-size:14px;cursor:pointer}
-.item-ctrl span{font-size:14px;min-width:18px;text-align:center}
-.footer{position:fixed;bottom:0;left:0;right:0;background:#fff;padding:12px;box-shadow:0 -2px 4px rgba(0,0,0,.1)}
-.total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.total-label{font-size:14px}
-.total-price{font-size:16px;font-weight:bold;color:#d92b2b}
-.checkout-btn{width:100%;padding:10px;border:none;border-radius:6px;background:#d92b2b;color:#fff;font-size:15px;font-weight:bold;cursor:pointer}
-.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);justify-content:center;align-items:center;z-index:100}
-.modal-content{background:#fff;padding:20px;border-radius:8px;max-width:320px;width:90%;text-align:center}
-.modal-title{font-size:16px;font-weight:bold;margin-bottom:12px;color:#d92b2b}
-.modal-input{width:100%;padding:8px;margin:6px 0;border:1px solid #ddd;border-radius:4px;font-size:14px}
-.modal-btn{padding:8px 20px;border:none;border-radius:4px;background:#d92b2b;color:#fff;font-size:14px;cursor:pointer}
-.pay-type{display:flex;gap:8px;margin-bottom:12px;justify-content:center}
-.pay-type button{flex:1;padding:8px;border:1px solid #d92b2b;border-radius:4px;background:#fff;color:#d92b2b;font-size:13px;cursor:pointer}
-.pay-type button.active{background:#d92b2b;color:#fff}
+.item-price{color:#c41e3a;font-weight:bold}
+.item-ctrl{display:flex;gap:8px;align-items:center}
+.item-ctrl button{width:30px;height:30px;border-radius:50%;border:none;background:#f1f1f1}
+.footer{position:fixed;bottom:0;left:0;right:0;background:#fff;padding:15px;box-shadow:0 -2px 5px rgba(0,0,0,0.1)}
+.total-row{display:flex;justify-content:space-between;margin-bottom:10px;font-size:16px}
+.checkout-btn{width:100%;padding:12px;background:#c41e3a;color:white;border:none;border-radius:8px;font-size:16px;font-weight:bold}
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);justify-content:center;align-items:center}
+.modal-content{background:#fff;padding:25px;border-radius:10px;width:90%;max-width:350px}
+.modal input{width:100%;padding:10px;margin:8px 0;border:1px solid #ddd;border-radius:6px}
+.modal-btn{margin-top:10px;padding:10px;width:100%;background:#c41e3a;color:white;border:none;border-radius:6px}
+.pay-type{display:flex;gap:10px;margin:10px 0}
+.pay-type button{flex:1;padding:8px;border:1px solid #c41e3a;background:#fff;border-radius:6px}
+.pay-type button.active{background:#c41e3a;color:#fff}
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="header-title">
-    <h1>線上點餐 | Đặt hàng online</h1>
-  </div>
 
-  <div class="order-type">
-    <button class="active" onclick="changeOrderType(this, '內用')">內用 - Tại nhà</button>
-    <button onclick="changeOrderType(this, '自取')">自取 - Mang về</button>
-    <button onclick="changeOrderType(this, '外送')">外送 - Giao hàng</button>
+<div class="container">
+  <h2 style="text-align:center; margin-bottom:15px">台灣小吃點餐</h2>
+
+  <div style="display:flex;gap:8px;margin-bottom:15px">
+    <button onclick="setType(this,'內用')" class="active">內用</button>
+    <button onclick="setType(this,'自取')">自取</button>
+    <button onclick="setType(this,'外送')">外送</button>
   </div>
 
   <!-- 早餐 -->
   <div class="category">
-    <div class="category-title">早餐 - Bữa sáng</div>
+    <div class="category-title">早餐</div>
     <div class="item" data-price="45000">
-      <img class="item-img" src="https://picsum.photos/id/306/100/100">
-      <div class="item-info">
-        <div class="item-name">蛋餅</div>
-        <div class="item-name-vn">Bánh trứng rán</div>
-      </div>
+      <div class="item-info"><div>蛋餅</div><div style="font-size:12px;color:#666">Bánh trứng rán</div></div>
       <div class="item-price">45.000₫</div>
       <div class="item-ctrl">
-        <button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button>
+        <button onclick="cut(this)">-</button>
+        <span>0</span>
+        <button onclick="add(this)">+</button>
       </div>
     </div>
     <div class="item" data-price="50000">
-      <img class="item-img" src="https://picsum.photos/id/292/100/100">
-      <div class="item-info">
-        <div class="item-name">飯糰</div>
-        <div class="item-name-vn">Cơm nắm</div>
-      </div>
+      <div class="item-info"><div>飯糰</div><div style="font-size:12px;color:#666">Cơm nắm</div></div>
       <div class="item-price">50.000₫</div>
       <div class="item-ctrl">
-        <button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button>
-      </div>
-    </div>
-    <div class="item" data-price="20000">
-      <img class="item-img" src="https://picsum.photos/id/1074/100/100">
-      <div class="item-info">
-        <div class="item-name">鹹豆漿</div>
-        <div class="item-name-vn">Sữa đậu nành mặn</div>
-      </div>
-      <div class="item-price">20.000₫</div>
-      <div class="item-ctrl">
-        <button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button>
+        <button onclick="cut(this)">-</button>
+        <span>0</span>
+        <button onclick="add(this)">+</button>
       </div>
     </div>
   </div>
 
   <!-- 午餐 -->
   <div class="category">
-    <div class="category-title">午餐 - Bữa trưa</div>
+    <div class="category-title">午餐</div>
     <div class="item" data-price="65000">
-      <img class="item-img" src="https://picsum.photos/id/1080/100/100">
-      <div class="item-info">
-        <div class="item-name">燒肉飯</div>
-        <div class="item-name-vn">Cơm thịt nướng</div>
-      </div>
+      <div class="item-info"><div>燒肉飯</div></div>
       <div class="item-price">65.000₫</div>
       <div class="item-ctrl">
-        <button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button>
+        <button onclick="cut(this)">-</button>
+        <span>0</span>
+        <button onclick="add(this)">+</button>
       </div>
     </div>
     <div class="item" data-price="60000">
-      <img class="item-img" src="https://picsum.photos/id/324/100/100">
-      <div class="item-info">
-        <div class="item-name">滷肉飯</div>
-        <div class="item-name-vn">Cơm thịt kho</div>
-      </div>
+      <div class="item-info"><div>滷肉飯</div></div>
       <div class="item-price">60.000₫</div>
       <div class="item-ctrl">
-        <button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button>
-      </div>
-    </div>
-    <div class="item" data-price="55000">
-      <img class="item-img" src="https://picsum.photos/id/225/100/100">
-      <div class="item-info">
-        <div class="item-name">炒麵</div>
-        <div class="item-name-vn">Mì xào</div>
-      </div>
-      <div class="item-price">55.000₫</div>
-      <div class="item-ctrl">
-        <button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button>
+        <button onclick="cut(this)">-</button>
+        <span>0</span>
+        <button onclick="add(this)">+</button>
       </div>
     </div>
   </div>
 
   <!-- 炸類 -->
   <div class="category">
-    <div class="category-title">炸類 - Món chiên</div>
+    <div class="category-title">炸類</div>
     <div class="item" data-price="80000">
-      <img class="item-img" src="https://picsum.photos/id/488/100/100">
-      <div class="item-info">
-        <div class="item-name">鹹酥雞</div>
-        <div class="item-name-vn">Gà chiên muối</div>
-      </div>
+      <div class="item-info"><div>鹹酥雞</div></div>
       <div class="item-price">80.000₫</div>
       <div class="item-ctrl">
-        <button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button>
-      </div>
-    </div>
-    <div class="item" data-price="30000">
-      <img class="item-img" src="https://picsum.photos/id/139/100/100">
-      <div class="item-info">
-        <div class="item-name">炸豆腐</div>
-        <div class="item-name-vn">Đậu hũ chiên</div>
-      </div>
-      <div class="item-price">30.000₫</div>
-      <div class="item-ctrl">
-        <button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button>
-      </div>
-    </div>
-    <div class="item" data-price="35000">
-      <img class="item-img" src="https://picsum.photos/id/1060/100/100">
-      <div class="item-info">
-        <div class="item-name">炸魚板</div>
-        <div class="item-name-vn">Cá khô chiên</div>
-      </div>
-      <div class="item-price">35.000₫</div>
-      <div class="item-ctrl">
-        <button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button>
-      </div>
-    </div>
-    <div class="item" data-price="40000">
-      <img class="item-img" src="https://picsum.photos/id/287/100/100">
-      <div class="item-info">
-        <div class="item-name">炸甜不辣</div>
-        <div class="item-name-vn">Chả giò chiên</div>
-      </div>
-      <div class="item-price">40.000₫</div>
-      <div class="item-ctrl">
-        <button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button>
-      </div>
-    </div>
-    <div class="item" data-price="45000">
-      <img class="item-img" src="https://picsum.photos/id/326/100/100">
-      <div class="item-info">
-        <div class="item-name">炸米血糕</div>
-        <div class="item-name-vn">Bánh huyết gạo chiên</div>
-      </div>
-      <div class="item-price">45.000₫</div>
-      <div class="item-ctrl">
-        <button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button>
-      </div>
-    </div>
-    <div class="item" data-price="25000">
-      <img class="item-img" src="https://picsum.photos/id/102/100/100">
-      <div class="item-info">
-        <div class="item-name">炸四季豆</div>
-        <div class="item-name-vn">Đậu xanh chiên</div>
-      </div>
-      <div class="item-price">25.000₫</div>
-      <div class="item-ctrl">
-        <button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button>
-      </div>
-    </div>
-    <div class="item" data-price="25000">
-      <img class="item-img" src="https://picsum.photos/id/84/100/100">
-      <div class="item-info">
-        <div class="item-name">炸花椰菜</div>
-        <div class="item-name-vn">Hoa cải chiên</div>
-      </div>
-      <div class="item-price">25.000₫</div>
-      <div class="item-ctrl">
-        <button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button>
-      </div>
-    </div>
-    <div class="item" data-price="30000">
-      <img class="item-img" src="https://picsum.photos/id/174/100/100">
-      <div class="item-info">
-        <div class="item-name">炸皮蛋</div>
-        <div class="item-name-vn">Trứng bách thảo chiên</div>
-      </div>
-      <div class="item-price">30.000₫</div>
-      <div class="item-ctrl">
-        <button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button>
-      </div>
-    </div>
-    <div class="item" data-price="90000">
-      <img class="item-img" src="https://picsum.photos/id/493/100/100">
-      <div class="item-info">
-        <div class="item-name">炸魷魚鬚</div>
-        <div class="item-name-vn">Móng mực chiên</div>
-      </div>
-      <div class="item-price">90.000₫</div>
-      <div class="item-ctrl">
-        <button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button>
+        <button onclick="cut(this)">-</button>
+        <span>0</span>
+        <button onclick="add(this)">+</button>
       </div>
     </div>
   </div>
 
   <!-- 湯品 -->
   <div class="category">
-    <div class="category-title">湯品 - Súp</div>
+    <div class="category-title">湯品</div>
     <div class="item" data-price="35000">
-      <img class="item-img" src="https://picsum.photos/id/155/100/100">
-      <div class="item-info">
-        <div class="item-name">季節湯</div>
-        <div class="item-name-vn">Súp theo mùa</div>
-      </div>
+      <div class="item-info"><div>季節湯</div></div>
       <div class="item-price">35.000₫</div>
       <div class="item-ctrl">
-        <button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button>
+        <button onclick="cut(this)">-</button>
+        <span>0</span>
+        <button onclick="add(this)">+</button>
       </div>
     </div>
   </div>
 
   <!-- 飲料 -->
   <div class="category">
-    <div class="category-title">飲料 - Đồ uống</div>
+    <div class="category-title">飲料</div>
     <div class="item" data-price="15000">
-      <img class="item-img" src="https://picsum.photos/id/1074/100/100">
-      <div class="item-info">
-        <div class="item-name">豆漿</div>
-        <div class="item-name-vn">Sữa đậu nành</div>
-      </div>
+      <div class="item-info"><div>豆漿</div></div>
       <div class="item-price">15.000₫</div>
       <div class="item-ctrl">
-        <button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button>
-      </div>
-    </div>
-    <div class="item" data-price="25000">
-      <img class="item-img" src="https://picsum.photos/id/141/100/100">
-      <div class="item-info">
-        <div class="item-name">洛神花茶</div>
-        <div class="item-name-vn">Trà hoa sen rồng</div>
-      </div>
-      <div class="item-price">25.000₫</div>
-      <div class="item-ctrl">
-        <button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button>
-      </div>
-    </div>
-    <div class="item" data-price="20000">
-      <img class="item-img" src="https://picsum.photos/id/766/100/100">
-      <div class="item-info">
-        <div class="item-name">紅茶</div>
-        <div class="item-name-vn">Trà đen</div>
-      </div>
-      <div class="item-price">20.000₫</div>
-      <div class="item-ctrl">
-        <button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button>
-      </div>
-    </div>
-    <div class="item" data-price="30000">
-      <img class="item-img" src="https://picsum.photos/id/180/100/100">
-      <div class="item-info">
-        <div class="item-name">綠豆沙</div>
-        <div class="item-name-vn">Sữa đậu xanh</div>
-      </div>
-      <div class="item-price">30.000₫</div>
-      <div class="item-ctrl">
-        <button onclick="down(this)">-</button><span>0</span><button onclick="up(this)">+</button>
+        <button onclick="cut(this)">-</button>
+        <span>0</span>
+        <button onclick="add(this)">+</button>
       </div>
     </div>
   </div>
@@ -301,103 +129,157 @@ body{background:#f8f5f0;padding:20px}
 
 <div class="footer">
   <div class="total-row">
-    <div class="total-label">合計 - Tổng:</div>
-    <div class="total-price" id="totalPrice">0₫</div>
+    <div>合計：</div>
+    <div id="total" style="font-weight:bold;color:#c41e3a">0₫</div>
   </div>
-  <button class="checkout-btn" onclick="checkout()">結帳 - Thanh toán</button>
+  <button class="checkout-btn" onclick="checkout()">結帳</button>
 </div>
 
-<!-- 外送資訊 -->
+<!-- 外送表單 -->
 <div class="modal" id="deliveryModal">
   <div class="modal-content">
-    <div class="modal-title">外送資訊 - Thông tin giao hàng</div>
-    <input class="modal-input" id="addr" placeholder="住址 - Địa chỉ">
-    <input class="modal-input" id="phone" placeholder="電話 - Số điện thoại">
-    <button class="modal-btn" onclick="submitDelivery()">確認 - Xác nhận</button>
+    <h3>外送資訊</h3>
+    <input id="addr" placeholder="住址">
+    <input id="tel" placeholder="電話">
+    <button class="modal-btn" onclick="sendDelivery()">確認</button>
   </div>
 </div>
 
-<!-- 支付方式 -->
+<!-- 支付 -->
 <div class="modal" id="payModal">
   <div class="modal-content">
-    <div class="modal-title">支付方式 - Phương thức thanh toán</div>
+    <h3>支付方式</h3>
     <div class="pay-type">
-      <button onclick="setPay(this,'現金')">現金 - Tiền mặt</button>
-      <button onclick="setPay(this,'貨到付款')">貨到付款 - Thanh toán khi nhận hàng</button>
+      <button onclick="setPay(this,'現金')">現金</button>
+      <button onclick="setPay(this,'貨到付款')">貨到付款</button>
     </div>
-    <button class="modal-btn" onclick="goPay()">確認 - Xác nhận</button>
+    <button class="modal-btn" onclick="sendOrder()">確認下單</button>
   </div>
 </div>
 
-<!-- 成功提示 -->
-<div class="modal" id="successModal">
+<!-- 成功 -->
+<div class="modal" id="okModal">
   <div class="modal-content">
-    <div class="modal-title">下單成功!</div>
-    <div class="modal-text" id="successTxt"></div>
-    <button class="modal-btn" onclick="closeAll()">確認 - Xác nhận</button>
+    <h3>下單成功</h3>
+    <div id="okText"></div>
+    <button class="modal-btn" onclick="closeAll()">確認</button>
   </div>
 </div>
 
 <script>
-let orderType = "內用";
-let payType = "";
-let orderNo = 1;
-let addr = "", phone = "";
+let type = "內用";
+let pay = "";
+let orderId = 1;
+let addr = "";
+let tel = "";
 
-function changeOrderType(btn, t){
-  document.querySelectorAll('.order-type button').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  orderType = t;
+function setType(el,t){
+  document.querySelectorAll(".footer + div button").forEach(b=>b.classList.remove("active"));
+  el.classList.add("active");
+  type = t;
 }
-function up(el){el.previousElementSibling.textContent = +el.previousElementSibling.textContent+1; cal()}
-function down(el){if(+el.nextElementSibling.textContent>0)el.nextElementSibling.textContent--; cal()}
+
+function add(el){
+  let num = el.previousElementSibling;
+  num.textContent = parseInt(num.textContent)+1;
+  cal();
+}
+function cut(el){
+  let num = el.nextElementSibling;
+  if(num.textContent>0) num.textContent = parseInt(num.textContent)-1;
+  cal();
+}
+
 function cal(){
-  let total=0;
-  document.querySelectorAll('.item').forEach(i=>{
-    let p=+i.dataset.price, c=+i.querySelector('.item-ctrl span').textContent;
+  let total = 0;
+  document.querySelectorAll(".item").forEach(it=>{
+    let p = parseInt(it.dataset.price);
+    let c = parseInt(it.querySelector("span").textContent);
     total += p*c;
   });
-  document.getElementById('totalPrice').textContent = total.toLocaleString('vi-VN') + '₫';
+  document.getElementById("total").textContent = total.toLocaleString('vi-VN') + "₫";
 }
+
 function checkout(){
-  let total = document.getElementById('totalPrice').textContent.replace(/\D/g,'');
-  if(total==0){alert('請選擇商品'); return;}
-  if(orderType=="外送"){
-    document.getElementById('deliveryModal').style.display='flex';
+  let t = document.getElementById("total").textContent.replace(/\D/g,"");
+  if(t==0){alert("請先選商品");return;}
+  if(type=="外送"){
+    document.getElementById("deliveryModal").style.display="flex";
     return;
   }
   openPay();
 }
-function submitDelivery(){
-  addr = document.getElementById('addr').value.trim();
-  phone = document.getElementById('phone').value.trim();
-  if(!addr || !phone){alert('請填寫住址與電話'); return;}
-  document.getElementById('deliveryModal').style.display='none';
+
+function sendDelivery(){
+  addr = document.getElementById("addr").value.trim();
+  tel = document.getElementById("tel").value.trim();
+  if(!addr || !tel){alert("請填住址與電話");return;}
+  document.getElementById("deliveryModal").style.display="none";
   openPay();
 }
+
 function openPay(){
-  payType="";
-  document.querySelectorAll('.pay-type button').forEach(b=>b.classList.remove('active'));
-  document.getElementById('payModal').style.display='flex';
+  pay = "";
+  document.querySelectorAll(".pay-type button").forEach(b=>b.classList.remove("active"));
+  document.getElementById("payModal").style.display="flex";
 }
-function setPay(btn,t){
-  document.querySelectorAll('.pay-type button').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  payType = t;
+
+function setPay(el,t){
+  document.querySelectorAll(".pay-type button").forEach(b=>b.classList.remove("active"));
+  el.classList.add("active");
+  pay = t;
 }
-function goPay(){
-  if(!payType){alert('請選擇支付方式'); return;}
-  document.getElementById('payModal').style.display='none';
-  let total = +document.getElementById('totalPrice').textContent.replace(/\D/g,'');
-  let txt = `訂單號：#${orderNo}\n類型：${orderType}\n支付：${payType}\n`;
-  if(orderType=="外送") txt += `住址：${addr}\n電話：${phone}\n`;
-  txt += `金額：${total.toLocaleString('vi-VN')}₫`;
-  document.getElementById('successTxt').textContent = txt;
-  document.getElementById('successModal').style.display='flex';
-  orderNo++; addr=""; phone="";
-  document.querySelectorAll('.item-ctrl span').forEach(s=>s.textContent=0); cal();
+
+// 這裡就是「下單傳送後台」，我已經寫好，你不用動
+function sendOrder(){
+  if(!pay){alert("請選支付方式");return;}
+  document.getElementById("payModal").style.display="none";
+
+  let items = [];
+  document.querySelectorAll(".item").forEach(it=>{
+    let name = it.querySelector(".item-info div").textContent;
+    let price = parseInt(it.dataset.price);
+    let qty = parseInt(it.querySelector(".item-ctrl span").textContent);
+    if(qty>0) items.push({name,price,qty});
+  });
+
+  let total = parseInt(document.getElementById("total").textContent.replace(/\D/g,""));
+
+  let order = {
+    orderId: orderId,
+    type: type,
+    pay: pay,
+    addr: addr,
+    tel: tel,
+    total: total,
+    items: items
+  };
+
+  // 傳給後台
+  fetch("get_orders.php",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify(order)
+  });
+
+  // 顯示成功
+  let msg = `訂單#${orderId}\n類型：${type}\n支付：${pay}`;
+  if(type=="外送") msg += `\n住址：${addr}\n電話：${tel}`;
+  msg += `\n金額：${total.toLocaleString('vi-VN')}₫`;
+  document.getElementById("okText").textContent = msg;
+  document.getElementById("okModal").style.display="flex";
+
+  // 清空
+  orderId++;
+  addr = ""; tel = "";
+  document.querySelectorAll(".item span").forEach(s=>s.textContent=0);
+  cal();
 }
-function closeAll(){document.getElementById('successModal').style.display='none';}
+
+function closeAll(){
+  document.getElementById("okModal").style.display="none";
+}
 </script>
+
 </body>
 </html>
