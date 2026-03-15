@@ -24,7 +24,8 @@
   .total{font-weight:bold;font-size:18px;color:#e63946;margin:12px 0}
   .btn-send{width:100%;padding:14px;background:#2563eb;color:white;border:none;border-radius:12px;font-size:17px;font-weight:bold}
   .customer-info{margin-top:16px;padding:12px;background:#f1f5f9;border-radius:8px}
-  .customer-info input{width:100%;margin:6px 0;padding:10px;border:1px solid #ddd;border-radius:6px;font-size:15px}
+  .customer-info input,
+  .customer-info select{width:100%;margin:6px 0;padding:10px;border:1px solid #ddd;border-radius:6px;font-size:15px}
   .customer-info label{font-size:14px;color:#555}
 </style>
 </head>
@@ -308,6 +309,16 @@
       <input type="tel" id="customerPhone" placeholder="請輸入電話號碼">
       <label>住址 / Địa chỉ:</label>
       <input type="text" id="customerAddr" placeholder="請輸入住址">
+      <label>付款方式 / Phương thức thanh toán:</label>
+      <select id="payMethod">
+        <option value="現金">現金 / Tiền mặt</option>
+        <option value="轉帳">轉帳 / Chuyển khoản</option>
+      </select>
+      <label>取餐方式 / Phương thức nhận hàng:</label>
+      <select id="pickupMethod">
+        <option value="自取">自取 / Tự lấy</option>
+        <option value="外送">外送 / Giao hàng</option>
+      </select>
     </div>
 
     <button class="btn-send" onclick="sendOrder()">Gửi đơn hàng</button>
@@ -370,14 +381,18 @@ async function sendOrder() {
   let name = document.getElementById("customerName").value || "未填寫";
   let phone = document.getElementById("customerPhone").value || "未填寫";
   let addr = document.getElementById("customerAddr").value || "未填寫";
+  let payMethod = document.getElementById("payMethod").value;
+  let pickupMethod = document.getElementById("pickupMethod").value;
 
-  // 組成完整訂單內容（包含聯絡資訊 + 菜品明細）
+  // 組成完整訂單內容（強制顯示所有資訊）
   let orderDetail = "【台灣小吃店】新訂單通知\n";
   orderDetail += "時間：" + new Date().toString() + "\n\n";
   orderDetail += "顧客資訊 / Thông tin khách hàng:\n";
   orderDetail += `姓名 / Họ tên: ${name}\n`;
   orderDetail += `電話 / Số điện thoại: ${phone}\n`;
-  orderDetail += `住址 / Địa chỉ: ${addr}\n\n`;
+  orderDetail += `住址 / Địa chỉ: ${addr}\n`;
+  orderDetail += `付款方式 / Phương thức thanh toán: ${payMethod}\n`;
+  orderDetail += `取餐方式 / Phương thức nhận hàng: ${pickupMethod}\n\n`;
   orderDetail += "點餐內容 / Món đã gọi:\n";
   let total = 0;
   for (let k in order) {
@@ -395,7 +410,7 @@ async function sendOrder() {
       body: JSON.stringify({ text: orderDetail, total: total })
     });
 
-    // 2. 發送郵件備份
+    // 2. 發送郵件備份（強制塞入完整內容）
     let mailtoLink = `mailto:${EMAIL}?subject=【台灣小吃店】新訂單通知&body=${encodeURIComponent(orderDetail)}`;
     window.open(mailtoLink, "_blank");
 
@@ -407,6 +422,8 @@ async function sendOrder() {
     document.getElementById("customerName").value = "";
     document.getElementById("customerPhone").value = "";
     document.getElementById("customerAddr").value = "";
+    document.getElementById("payMethod").value = "現金";
+    document.getElementById("pickupMethod").value = "自取";
     updateCart();
   } catch (err) {
     alert("❌ Gửi thất bại, vui lòng thử lại\n傳送失敗，請再試一次");
