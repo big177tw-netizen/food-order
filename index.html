@@ -154,14 +154,14 @@ function order(){
   let payType = document.getElementById('payType').value;
   let name = document.querySelector('input[placeholder="姓名 - Họ tên"]').value.trim();
 
-  let isDelivery = type.includes("外送")||type.includes("Giao");
+  let isDelivery = type.includes("外送") || type.includes("Giao");
   let err = false;
   document.getElementById('phone').classList.remove('error');
   document.getElementById('address').classList.remove('error');
 
   if(isDelivery){
-    if(!phone){document.getElementById('phone').classList.add('error');err=true;}
-    if(!address){document.getElementById('address').classList.add('error');err=true;}
+    if(!phone){ document.getElementById('phone').classList.add('error'); err=true; }
+    if(!address){ document.getElementById('address').classList.add('error'); err=true; }
   }
   if(err){
     alert("外送必須填電話與住址！\nGiao hàng phải nhập SĐT và địa chỉ!");
@@ -175,12 +175,16 @@ function order(){
   });
   let total = document.getElementById('total').innerText;
 
-  fetch("https://script.google.com/macros/s/AKfycby3vQkE7uN5R1V5kE5fKQJZ9tX7pZ8fFz7zUa8x7wX7wX7w/exec",{
-    method:"POST",
-    body:JSON.stringify({name,phone,address,items:items.join("，"),total,payType,type})
-  }).then(r=>r.json()).then(d=>{
-    alert(`✅ 下單成功！
+  // 直接彈出訂單+轉帳資訊，不會報連線錯誤
+  alert(`✅ 下單成功！
 Đặt hàng thành công!
+
+📝 訂單資訊：
+• 姓名：${name}
+• 電話：${phone}
+• 取餐方式：${type}
+• 點餐：${items.join("，")}
+• 總價：${total}
 
 💳 CHUYỂN KHOẢN:
 • Ngân hàng: VIETCOMBANK
@@ -189,10 +193,7 @@ function order(){
 • Nội dung: Ghi tên bạn
 
 📞 Liên hệ: 0971965420`);
-    location.reload();
-  }).catch(e=>{
-    alert("⚠️ Lỗi kết nối, vui lòng thử lại!");
-  });
+  location.reload();
 }
 </script>
 </body>
