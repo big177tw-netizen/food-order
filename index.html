@@ -10,6 +10,7 @@ body{margin:0;padding:12px;background:#f4f6f8;font-family:Arial}
 .title{text-align:center;font-size:22px;font-weight:bold;margin-bottom:16px}
 .cate{font-weight:bold;color:#e63946;margin:20px 0 8px;font-size:16px}
 .item{display:flex;align-items:center;padding:10px 0;border-bottom:1px solid #eee}
+.item img{width:70px;height:70px;object-fit:cover;border-radius:8px;margin-right:10px}
 .info{flex:1}
 .name{font-weight:bold}
 .vn{font-size:13px;color:#666}
@@ -29,6 +30,7 @@ input,select{width:100%;padding:10px;margin:6px 0;border:1px solid #ddd;border-r
   <div class="cate">Món chính</div>
 
   <div class="item" data-name="蛋餅" data-price="30000">
+    <img src="蛋餅.jpg" alt="蛋餅">
     <div class="info">
       <div class="name">蛋餅</div>
       <div class="vn">Bánh trứng</div>
@@ -42,6 +44,7 @@ input,select{width:100%;padding:10px;margin:6px 0;border:1px solid #ddd;border-r
   </div>
 
   <div class="item" data-name="飯糰" data-price="25000">
+    <img src="飯糰.jpg" alt="飯糰">
     <div class="info">
       <div class="name">飯糰</div>
       <div class="vn">Cơm cuộn</div>
@@ -54,7 +57,22 @@ input,select{width:100%;padding:10px;margin:6px 0;border:1px solid #ddd;border-r
     </div>
   </div>
 
+  <div class="item" data-name="燒肉飯" data-price="45000">
+    <img src="燒肉飯.jpg" alt="燒肉飯">
+    <div class="info">
+      <div class="name">燒肉飯</div>
+      <div class="vn">Cơm thịt nướng</div>
+    </div>
+    <div class="price">45.000₫</div>
+    <div class="ctrl">
+      <button onclick="del(this)">-</button>
+      <span>0</span>
+      <button onclick="add(this)">+</button>
+    </div>
+  </div>
+
   <div class="item" data-name="滷肉飯" data-price="40000">
+    <img src="滷肉飯.jpg" alt="滷肉飯">
     <div class="info">
       <div class="name">滷肉飯</div>
       <div class="vn">Cơm thịt kho</div>
@@ -67,12 +85,41 @@ input,select{width:100%;padding:10px;margin:6px 0;border:1px solid #ddd;border-r
     </div>
   </div>
 
+  <div class="item" data-name="炒麵" data-price="38000">
+    <img src="炒麵.jpg" alt="炒麵">
+    <div class="info">
+      <div class="name">炒麵</div>
+      <div class="vn">Mì xào</div>
+    </div>
+    <div class="price">38.000₫</div>
+    <div class="ctrl">
+      <button onclick="del(this)">-</button>
+      <span>0</span>
+      <button onclick="add(this)">+</button>
+    </div>
+  </div>
+
+  <div class="item" data-name="鹹豆漿" data-price="25000">
+    <img src="鹹豆漿.jpg" alt="鹹豆漿">
+    <div class="info">
+      <div class="name">鹹豆漿</div>
+      <div class="vn">Sữa đậu nành mặn</div>
+    </div>
+    <div class="price">25.000₫</div>
+    <div class="ctrl">
+      <button onclick="del(this)">-</button>
+      <span>0</span>
+      <button onclick="add(this)">+</button>
+    </div>
+  </div>
+
   <div class="cate">Món chiên</div>
 
   <div class="item" data-name="鹹酥雞" data-price="35000">
+    <img src="鹹酥雞.jpg" alt="鹹酥雞">
     <div class="info">
       <div class="name">鹹酥雞</div>
-      <div class="vn">Gà rán muối</div>
+      <div class="vn">Gà rán muối tiêu</div>
     </div>
     <div class="price">35.000₫</div>
     <div class="ctrl">
@@ -82,14 +129,99 @@ input,select{width:100%;padding:10px;margin:6px 0;border:1px solid #ddd;border-r
     </div>
   </div>
 
-  <div class="cate">Đồ uống</div>
+  <div class="item" data-name="炸豆腐" data-price="25000">
+    <img src="炸豆腐.jpg" alt="炸豆腐">
+    <div class="info">
+      <div class="name">炸豆腐</div>
+      <div class="vn">Đậu phụ rán</div>
+    </div>
+    <div class="price">25.000₫</div>
+    <div class="ctrl">
+      <button onclick="del(this)">-</button>
+      <span>0</span>
+      <button onclick="add(this)">+</button>
+    </div>
+  </div>
+
+  <div class="item" data-name="炸魚板" data-price="28000">
+    <img src="炸魚板.jpg" alt="炸魚板">
+    <div class="info">
+      <div class="name">炸魚板</div>
+      <div class="vn">Bánh cá rán</div>
+    </div>
+    <div class="price">28.000₫</div>
+    <div class="ctrl">
+      <button onclick="del(this)">-</button>
+      <span>0</span>
+      <button onclick="add(this)">+</button>
+    </div>
+  </div>
+
+  <div class="item" data-name="炸甜不辣" data-price="28000">
+    <img src="炸甜不辣.jpg" alt="炸甜不辣">
+    <div class="info">
+      <div class="name">炸甜不辣</div>
+      <div class="vn">Thiên bạt rán</div>
+    </div>
+    <div class="price">28.000₫</div>
+    <div class="ctrl">
+      <button onclick="del(this)">-</button>
+      <span>0</span>
+      <button onclick="add(this)">+</button>
+    </div>
+  </div>
+
+  <div class="item" data-name="炸米血糕" data-price="28000">
+    <img src="炸米血糕.jpg" alt="炸米血糕">
+    <div class="info">
+      <div class="name">炸米血糕</div>
+      <div class="vn">Bánh gạo huyết rán</div>
+    </div>
+    <div class="price">28.000₫</div>
+    <div class="ctrl">
+      <button onclick="del(this)">-</button>
+      <span>0</span>
+      <button onclick="add(this)">+</button>
+    </div>
+  </div>
+
+  <div class="cate">Đồ uống & Canh</div>
+
+  <div class="item" data-name="季節湯" data-price="25000">
+    <img src="季節湯.jpg" alt="季節湯">
+    <div class="info">
+      <div class="name">季節湯</div>
+      <div class="vn">Súp mùa</div>
+    </div>
+    <div class="price">25.000₫</div>
+    <div class="ctrl">
+      <button onclick="del(this)">-</button>
+      <span>0</span>
+      <button onclick="add(this)">+</button>
+    </div>
+  </div>
 
   <div class="item" data-name="豆漿" data-price="18000">
+    <img src="豆漿.jpg" alt="豆漿">
     <div class="info">
       <div class="name">豆漿</div>
       <div class="vn">Sữa đậu nành</div>
     </div>
     <div class="price">18.000₫</div>
+    <div class="ctrl">
+      <button onclick="del(this)">-</button>
+      <span>0</span>
+      <button onclick="add(this)">+</button>
+    </div>
+  </div>
+
+  <div class="item" data-name="洛神花茶" data-price="22000">
+    <img src="洛神花茶.jpg" alt="洛神花茶">
+    <div class="info">
+      <div class="name">洛神花茶</div>
+      <div class="vn">Trà hoa lạc thần</div>
+    </div>
+    <div class="price">22.000₫</div>
     <div class="ctrl">
       <button onclick="del(this)">-</button>
       <span>0</span>
@@ -130,7 +262,7 @@ input,select{width:100%;padding:10px;margin:6px 0;border:1px solid #ddd;border-r
 <script>
 let order = {}
 
-// 👉 這裡我已經幫你換成「正確Telegram版本網址」
+// 請替換成你剛部署好的 Google Script 新網址
 const GOOGLE_URL = "https://script.google.com/macros/s/AKfycbzZ8CjClTV4Eo9mjR_ScNvfyxcTZ_C04akrHbs735OqGRYnWotEJYmnIztQrT3wYGQ7/exec";
 
 function add(el) {
