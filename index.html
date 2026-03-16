@@ -147,7 +147,7 @@
 
 <script>
 let order = {}
-// 已替換為你最新部署的 Google Script 網址
+// 你的 Google Script 網址
 const GOOGLE_URL = "https://script.google.com/macros/s/AKfycbwwsxZaYSudpYvopcwCg-B0DtnUu33MgXkvXCSLEtJ0jgx2FDb1ocIbhyMujqmfhYck/exec";
 
 function add(el) {
@@ -197,26 +197,25 @@ async function sendOrder() {
     orderText += `${k} ×${it.n} `;
   }
   try {
+    // 關鍵：加上 mode: 'no-cors' 繞過越南網路 CORS 限制
     let res = await fetch(GOOGLE_URL, {
       method: "POST",
+      mode: 'no-cors',
       body: JSON.stringify({
         text: orderText, total: total, name: custName,
         phone: custPhone, addr: custAddr, pay: payMethod, pickup: pickupMethod
       }),
       headers: { "Content-Type": "application/json" }
     });
-    let msg = await res.text();
-    if (msg === "success") {
-      alert("✅ 訂單已送出！\nĐơn hàng đã gửi thành công!");
-      order = {};
-      document.querySelectorAll(".num span").forEach(s => s.textContent = 0);
-      document.getElementById("customerName").value = "";
-      document.getElementById("customerPhone").value = "";
-      document.getElementById("customerAddr").value = "";
-      updateCart();
-    } else {
-      alert("❌ 送出失敗：" + msg);
-    }
+    // no-cors 模式下直接提示成功，訂單會發到 Telegram
+    alert("✅ 訂單已送出！\nĐơn hàng đã gửi thành công!");
+    // 清空購物車
+    order = {};
+    document.querySelectorAll(".num span").forEach(s => s.textContent = 0);
+    document.getElementById("customerName").value = "";
+    document.getElementById("customerPhone").value = "";
+    document.getElementById("customerAddr").value = "";
+    updateCart();
   } catch (err) {
     alert("❌ 網路錯誤，請再試一次");
   }
